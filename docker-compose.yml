@@ -1,0 +1,19 @@
+version: "3"
+services:
+  test:
+    image: mongo:latest
+    container_name: test
+    ports:
+      - 27017:27017
+  api-pet-exemple:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: seach
+    ports:
+      - 8080:8080
+      - 5005:5005
+    environment:
+      - PROFILE=dev
+    links:
+      - test
