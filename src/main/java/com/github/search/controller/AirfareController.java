@@ -1,16 +1,23 @@
 package com.github.search.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.search.document.Airfare;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/test")
-public class AirfareController {
+public interface AirfareController {
 
-    @GetMapping
-    public String working()
-    {
-        return "it worked";
-    }
+    @GetMapping("/findAll")
+    ResponseEntity<?> findAll();
+
+    @GetMapping("/findId/{id}")
+    ResponseEntity<?> findId(@PathVariable("id") String id);
+
+    @PostMapping("/save")
+    ResponseEntity<?> save(@RequestBody Airfare airfare);
+
+    @PutMapping("/update/{id}")
+    ResponseEntity<?> update(@PathVariable("id") String id,@RequestBody Airfare t);
+
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<?> delete(@PathVariable("id") String id);
 }
